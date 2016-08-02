@@ -51,10 +51,12 @@ module.exports = function (content) {
       "@import          \"~bootstrap/less/variables.less\";\n"
     + "@icon-font-path: \"~bootstrap/fonts/\";\n"
     + "@import          \"./bootstrap.config.less\";\n";
-  source = start + styles.filter(function (style) {
+  orgsource = start + styles.filter(function (style) {
     return config.styles[style];
   }).map(function (style) {
     return "@import \"~bootstrap/less/" + style + ".less\";";
   }).join("\n");
+  var custvars = "@import \"./bootstrap.custom.less\";\n";
+  source = orgsource + custvars;
   return source;
 }
